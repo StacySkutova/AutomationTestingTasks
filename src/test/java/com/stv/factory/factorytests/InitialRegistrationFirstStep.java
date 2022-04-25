@@ -5,7 +5,7 @@ import com.stv.factory.factorypages.RegistrationPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class GherkinScenario1 extends BasicFactoryTest {
+public class InitialRegistrationFirstStep extends BasicFactoryTest {
     MyTestFactoryPage myTestFactoryPage = new MyTestFactoryPage();
 
     @Test(description = "Initialization/first step of a new customer's registration")
