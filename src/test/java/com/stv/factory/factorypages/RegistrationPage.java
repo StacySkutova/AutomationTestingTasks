@@ -7,7 +7,7 @@ public class RegistrationPage extends FactoryPage {
     @FindBy(className = "bem-checkout")
     private WebElement registrationContainer;
 
-    public boolean isRegistrationContainerDisplayed(){
+    public boolean isRegistrationContainerDisplayed() {
         return registrationContainer.isDisplayed();
     }
 }

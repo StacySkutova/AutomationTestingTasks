@@ -7,7 +7,7 @@ public class LoginPage extends FactoryPage {
     @FindBy(className = "bem-checkout__login-container")
     private WebElement loginContainer;
 
-    public boolean isLoginContainerDisplayed(){
+    public boolean isLoginContainerDisplayed() {
         return loginContainer.isDisplayed();
     }
 }

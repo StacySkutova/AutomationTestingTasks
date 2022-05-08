@@ -1,6 +1,7 @@
 package com.stv.factory.factorytests;
 
 import com.stv.framework.core.drivers.Driver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

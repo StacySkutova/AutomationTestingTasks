@@ -8,7 +8,8 @@ public abstract class FactoryPage {
     private static WebDriver getDriver() {
         return Driver.getDriver();
     }
-    protected FactoryPage(){
+
+    protected FactoryPage() {
         PageFactory.initElements(getDriver(), this);
     }
 }

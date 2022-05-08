@@ -2,12 +2,15 @@ package com.stv.factory.factorytests;
 
 import com.stv.factory.factorypages.LoginPage;
 import com.stv.factory.factorypages.MainFactoryPage;
+import com.stv.factory.factorypages.MyTestFactoryPage;
+import com.stv.factory.factorypages.RegistrationPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class MainFactoryTest extends BasicFactoryTest {
 
     MainFactoryPage mainFactoryPage = new MainFactoryPage();
+
     @Test (description = "Assert the main page is loaded and account icon is visible")
     public void assertAccountIconIsDisplayed() {
         boolean actualResult = mainFactoryPage .isAccountLinkDisplayed();
