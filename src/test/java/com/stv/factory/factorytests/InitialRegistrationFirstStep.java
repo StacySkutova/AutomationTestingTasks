@@ -10,7 +10,7 @@ public class InitialRegistrationFirstStep extends BasicFactoryTest {
 
     @Test(description = "Initialization/first step of a new customer's registration")
     public void emailChecking() {
-        myTestFactoryPage.clickOnInputField();
+        //myTestFactoryPage.clickOnInputField();
         myTestFactoryPage.clickOnContinueButton();
         Assert.assertEquals(new RegistrationPage().isRegistrationContainerDisplayed(), true, "Registration page isn't loaded properly");
     }

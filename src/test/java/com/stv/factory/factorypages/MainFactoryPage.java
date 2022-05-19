@@ -1,9 +1,16 @@
 package com.stv.factory.factorypages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+
 public class MainFactoryPage extends FactoryPage {
+    JavascriptExecutor js = (JavascriptExecutor) getDriver();
+
+    Actions hoverEmptyBasketElement = new Actions(getDriver());
 
     @FindBy(id = "accountLink")
     private WebElement accountLink;
@@ -30,6 +37,18 @@ public class MainFactoryPage extends FactoryPage {
 
     public void clickOnTrustButton() {
         trustButton.click();
+    }
+
+    public void isShopByCategoryScrolledDown() {
+        js.executeScript("arguments[0].scrollIntoView();", shopByCategory);
+    }
+
+    public void isShopByCategoryScrolledUp() {
+        js.executeScript("arguments[0].scrollIntoView();", checkBasketEmpty);
+    }
+
+    public void setHoverEmptyBasketElement() {
+        hoverEmptyBasketElement.moveToElement(checkBasketEmpty).build().perform();
     }
 
     public boolean isShopByCategoryDisplayed() {

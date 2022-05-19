@@ -11,10 +11,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.concurrent.TimeUnit;
 
-public class MyIndividualTaskScenarioTest extends BasicFactoryTest {
-    JavascriptExecutor js = (JavascriptExecutor) getDriver();
+import static com.stv.framework.core.lib.WigglePageURLs.MAIN_PAGE_START_URL;
 
+
+public class MyIndividualTaskScenarioSteps extends BasicFactoryTest {
     MainFactoryPage mainFactoryPage = new MainFactoryPage();
     CyclePage cyclePage = new CyclePage();
     CycleItemsCatalogPage cycleItemsCatalogPage = new CycleItemsCatalogPage();
@@ -22,66 +24,60 @@ public class MyIndividualTaskScenarioTest extends BasicFactoryTest {
 
     @Given("^Main page opened$")
     public void openMainPage() throws InterruptedException {
-        getDriver().get("https://www.wiggle.co.uk/");
-        mainFactoryPage.clickOnTrustButton();
+        getDriver().get(MAIN_PAGE_START_URL);
+        getDriver().manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         getDriver().manage().window().maximize();
-        Thread.sleep(2000);
+        mainFactoryPage.clickOnTrustButton();
+        getDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     }
 
     @When("^Scrolling down to find the text Shop By Category$")
     public void findShopByCategoryScrollingDown() throws InterruptedException {
-        WebElement shopCategoryElement = getDriver().findElement(By.className("bem-footer__category"));
-        js.executeScript("arguments[0].scrollIntoView();", shopCategoryElement);
+        mainFactoryPage.isShopByCategoryScrolledDown();
         mainFactoryPage.isShopByCategoryDisplayed();
-        Thread.sleep(2000L);
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @And("^Scrolling up to find the empty basket$")
-    public void checkBasketEmptyScrollingUp() {
-        WebElement cartElement = getDriver().findElement(By.className("bem-header__basket--empty"));
-        js.executeScript("arguments[0].scrollIntoView();", cartElement);
+    public void checkBasketEmptyScrollingUp() throws InterruptedException {
+        mainFactoryPage.isShopByCategoryScrolledUp();
         mainFactoryPage.isBasketEmpty();
-        Actions hoverEmptyBasketElement = new Actions(getDriver());
-        WebElement emptyBasketElement = getDriver().findElement(By.className("bem-header__basket--empty"));
-        hoverEmptyBasketElement.moveToElement(emptyBasketElement).build().perform();
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        mainFactoryPage.setHoverEmptyBasketElement();
     }
 
     @And("^Click link Cycle$")
     public void clickCycleLink() throws InterruptedException {
-        Thread.sleep(3000L);
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         mainFactoryPage.clickLinkCycle();
     }
 
     @And("^Check and click button Shop now$")
     public void checkAndClickShopNowButton() throws InterruptedException {
-        Thread.sleep(3000L);
+        getDriver().manage().timeouts().pageLoadTimeout(7, TimeUnit.SECONDS);
         cyclePage.checkLinkShopNow();
         cyclePage.clickLinkShopNow();
     }
 
     @And("^Check Cycle Items Catalog Page opened and the basket is empty$")
     public void checkNewPageOpenedAndBasketEmpty() throws InterruptedException {
-        Thread.sleep(3000);
+        getDriver().manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         cycleItemsCatalogPage.isCycleClothingDisplayed();
         cycleItemsCatalogPage.isBasketEmpty();
-        Actions hoverEmptyBasketElement = new Actions(getDriver());
-        WebElement emptyBasketElement = getDriver().findElement(By.className("bem-header__basket--empty"));
-        hoverEmptyBasketElement.moveToElement(emptyBasketElement).build().perform();
-        Thread.sleep(2000);
-        Actions moveFromEmptyBasketElement = new Actions(getDriver());
-        WebElement otherElement = getDriver().findElement(By.className("bem-header__list"));
-        moveFromEmptyBasketElement.moveToElement(otherElement).build().perform();
+        getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        cycleItemsCatalogPage.setHoverOtherElement();
+
     }
 
     @And("^Click on button Basket$")
     public void clickOnBasketButton() throws InterruptedException {
-        Thread.sleep(2000);
+        getDriver().manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         cycleItemsCatalogPage.clickOnBasket();
     }
 
     @Then("^Basket page opened and empty$")
     public void basketOpenedAndEmpty() throws InterruptedException {
-        Thread.sleep(3000);
+        getDriver().manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         basketPage.checkBasketOpenedAndEmpty();
     }
 }
